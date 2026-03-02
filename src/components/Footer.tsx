@@ -1,49 +1,75 @@
 import React from 'react'
+import Image from 'next/image'
 
 export function Footer() {
   return (
-    <footer className="px-m py-xxl bg-text text-white">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-xxl mb-xl">
-        <div className="md:col-span-2">
-          <h3 className="text-h3 font-semibold mb-m text-primarySurface">Galaxy Technologies</h3>
-          <p className="text-bodyMedium text-borderDark max-w-sm leading-relaxed">
-            Premium air conditioning products and professional services. Keeping you cool, calm, and
-            comfortable.
-          </p>
+    <footer className="flex flex-col items-center py-xxl px-s md:px-xxxl gap-xl border-t-[0.5px] border-grey bg-white w-full">
+      <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-container mx-auto gap-xl">
+        {/* Left Side: Logo & Info */}
+        <div className="flex flex-col items-start gap-m max-w-md">
+          <div className="relative w-[240px] h-[40px] mb-2">
+            <Image
+              src="/media/296df6681b7df5244edb8dab3154992c757e5558.png"
+              alt="Galaxy Technologies Logo"
+              fill
+              className="object-contain object-left"
+            />
+          </div>
+
+          <div className="flex flex-col gap-xs">
+            <h4 className="text-bodyMedium font-semibold text-text">Address:</h4>
+            <p className="text-bodyMedium text-textAlt leading-relaxed">
+              53/2331-D, opp. CKC High School, Ponnurunni, Vyttila,
+              <br />
+              Ernakulam, Kerala 682019
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-xs mt-2">
+            <h4 className="text-bodyMedium font-semibold text-text">Contact:</h4>
+            <div className="flex flex-col text-bodyMedium text-textAlt leading-relaxed">
+              <span>+91 9074025365</span>
+              <span>galaxytechnologies@gmail.com</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4 className="text-h5 font-semibold mb-m text-white">Quick Links</h4>
-          <ul className="flex flex-col gap-s text-bodyMedium text-borderDark w-fit">
-            <li className="hover:text-primarySurface cursor-pointer transition-colors block">
-              Products
+
+        {/* Right Side: Quick Links */}
+        <div className="flex flex-col items-start lg:items-end gap-m lg:pt-12 w-full lg:w-auto">
+          <ul className="flex flex-col items-start lg:items-end gap-s text-bodyMedium font-semibold text-text">
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Home
+              </a>
             </li>
-            <li className="hover:text-primarySurface cursor-pointer transition-colors block">
-              Services
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Products
+              </a>
             </li>
-            <li className="hover:text-primarySurface cursor-pointer transition-colors block">
-              About Us
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                About us
+              </a>
             </li>
-            <li className="hover:text-primarySurface cursor-pointer transition-colors block">
-              Contact
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Contact
+              </a>
             </li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-h5 font-semibold mb-m text-white">Contact Us</h4>
-          <ul className="flex flex-col gap-s text-bodyMedium text-borderDark">
-            <li className="block">+1 234 567 8900</li>
-            <li className="block">hello@galaxytech.com</li>
-            <li className="block">123 Premium Lane, Cool City</li>
           </ul>
         </div>
       </div>
-      <div className="max-w-5xl mx-auto pt-lg border-t border-textAlt text-center text-bodySmall text-borderDark flex flex-col md:flex-row justify-between items-center gap-m">
-        <p>&copy; {new Date().getFullYear()} Galaxy Technologies. All rights reserved.</p>
-        <div className="flex gap-lg">
-          <span className="cursor-pointer hover:text-white transition-colors">Privacy Policy</span>
-          <span className="cursor-pointer hover:text-white transition-colors">
-            Terms of Service
-          </span>
+
+      {/* Bottom Bar: Copyright & Privacy */}
+      <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-container mx-auto pt-lg border-t-[0.5px] border-grey mt-m gap-m">
+        <p className="text-bodySmall font-semibold text-textAlt">
+          &copy; {new Date().getFullYear()} Galaxy Technologies. All rights reserved.
+        </p>
+        <div className="flex items-center">
+          <a href="#" className="text-bodySmall text-textAlt hover:text-primary transition-colors">
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>

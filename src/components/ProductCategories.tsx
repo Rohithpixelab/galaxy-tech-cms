@@ -1,45 +1,70 @@
 import React from 'react'
-import { Wind, Wrench, ShieldCheck } from 'lucide-react'
+import Image from 'next/image'
 
 const categories = [
   {
-    title: 'Split ACs',
-    description: 'Energy-efficient and silent cooling solutions for any room.',
-    icon: <Wind size={32} className="text-primary" />,
+    title: 'Split AC',
+    description: 'Quiet, energy-efficient AC for homes and offices.',
+    image: '/media/split-ac.png',
   },
   {
-    title: 'AC Maintenance',
-    description: 'Expert servicing to keep your units running at peak performance.',
-    icon: <Wrench size={32} className="text-primary" />,
+    title: 'Cassette AC',
+    description: 'Uniform cooling for commercial spaces.',
+    image: '/media/cassette-ac.png',
   },
   {
-    title: 'Annual Contracts',
-    description: 'Comprehensive AMC plans for worry-free cooling year-round.',
-    icon: <ShieldCheck size={32} className="text-primary" />,
+    title: 'Ductable Systems',
+    description: 'Seamless centralised comfort.',
+    image: '/media/ductable-ac.png',
+  },
+  {
+    title: 'VRV / VRF',
+    description: 'Smart cooling for large buildings.',
+    image: '/media/vrv-vrf.png',
+  },
+  {
+    title: 'Tower AC',
+    description: 'Powerful cooling for large areas.',
+    image: '/media/tower-ac.png',
   },
 ]
 
 export function ProductCategories() {
   return (
-    <section className="px-m py-xxl bg-white">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-xl">
-          <h2 className="text-h3 md:text-h2 font-semibold text-text mb-xs">Our Offerings</h2>
-          <p className="text-bodyMedium text-textAlt">
-            Everything you need for perfect climate control.
+    <section className="bg-white py-xxl px-s md:px-xxxl">
+      <div className="max-w-container mx-auto flex flex-col items-center gap-xl text-center">
+        {/* Header */}
+        <div className="max-w-[830px] flex flex-col gap-xs">
+          <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt">
+            Explore Our Range of Daikin Air Conditioning Solutions
+          </h2>
+          <p className="text-bodySmall md:text-bodyMedium text-textAlt">
+            We offer a complete selection of Daikin air conditioners in Kochi, designed for comfort,
+            efficiency, and long-term reliability across residential and commercial environments.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
+
+        {/* Categories Grid - Adjusted to 5 columns on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-xl w-full">
           {categories.map((category, index) => (
-            <div
-              key={index}
-              className="bg-lightGrey p-xl rounded-lg border border-border hover:border-primary transition-colors flex flex-col items-center text-center group"
-            >
-              <div className="bg-white p-m rounded-m mb-m border border-border group-hover:border-primary transition-colors">
-                {category.icon}
+            <div key={index} className="flex flex-col items-start text-left gap-s group">
+              {/* Image Box */}
+              <div className="relative aspect-square w-full bg-white rounded-lg overflow-hidden border border-border group-hover:border-grey transition-colors">
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-              <h3 className="text-h4 font-semibold text-text mb-s">{category.title}</h3>
-              <p className="text-bodySmall text-textAlt">{category.description}</p>
+
+              {/* Text */}
+              <div className="flex flex-col gap-xs">
+                <h3 className="text-h5 font-semibold text-primaryDarkAlt leading-tight">
+                  {category.title}
+                </h3>
+                <p className="text-bodySmall text-textAlt leading-snug">{category.description}</p>
+              </div>
             </div>
           ))}
         </div>

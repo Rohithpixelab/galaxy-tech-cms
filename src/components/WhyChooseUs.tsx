@@ -1,30 +1,45 @@
 import React from 'react'
-import { CheckCircle2 } from 'lucide-react'
+import Image from 'next/image'
+import { Check } from 'lucide-react'
 
 const reasons = [
-  'Certified & Experienced Technicians',
-  'Premium Quality AC Units',
-  '24/7 Dedicated Customer Support',
-  'Transparent & Fixed Pricing',
-  'Fast & Reliable Response Time',
-  '100% Satisfaction Guarantee',
+  'Daikin authorised dealer with genuine products.',
+  'Experienced and certified service technicians.',
+  'Reliable AC service across Kochi.',
+  'Transparent pricing and honest recommendations.',
+  'Quick response and customer-focused support.',
+  'Complete solutions from sales to maintenance.',
 ]
 
 export function WhyChooseUs() {
   return (
-    <section className="px-m py-xxxl bg-white border-t border-border">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-h2 font-semibold text-text mb-xl">Why Choose Galaxy Technologies?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-lg text-left">
+    <section className="flex flex-col lg:flex-row items-center justify-center py-xxl px-s md:px-xxxl gap-xxl self-stretch bg-lightGrey w-full">
+      {/* Left side text and list */}
+      <div className="flex flex-col items-start gap-xs w-full lg:w-1/2 max-w-lg">
+        <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt mb-s">
+          Why Choose Galaxy Technologies
+        </h2>
+        <ul className="flex flex-col items-start gap-s w-full">
           {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-m bg-lightGrey p-lg rounded-xl border border-border"
-            >
-              <CheckCircle2 className="text-primary flex-shrink-0" size={28} />
-              <span className="text-bodyMedium text-text font-semibold">{reason}</span>
-            </div>
+            <li key={index} className="flex items-start gap-xs w-full">
+              <Check className="text-primary shrink-0 mt-1" size={24} />
+              <span className="text-bodyMedium text-textAlt font-regular leading-relaxed">
+                {reason}
+              </span>
+            </li>
           ))}
+        </ul>
+      </div>
+
+      {/* Right side Image */}
+      <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div className="relative w-full aspect-[4/3] max-w-[600px] rounded-lg overflow-hidden shrink-0">
+          <Image
+            src="/media/modern_indian_living_room_ac.png"
+            alt="Daikin AC in modern Indian living room"
+            fill
+            className="object-cover object-center rounded-lg"
+          />
         </div>
       </div>
     </section>

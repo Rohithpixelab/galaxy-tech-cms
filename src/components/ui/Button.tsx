@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 import clsx from 'clsx'
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+  variant?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+}
 
 export default function Button({
   children,
   variant = 'primary',
-  size = 'md',
+  size = 'sm',
   className = '',
   ...props
-}) {
+}: ButtonProps) {
   const baseStyles =
     'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2'
 

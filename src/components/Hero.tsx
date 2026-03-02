@@ -9,7 +9,7 @@ export const Hero = () => {
     <section id="hero" className="grid md:grid-cols-2 min-h-[90vh] overflow-hidden">
       {/* LEFT SIDE */}
       <div className="flex flex-col justify-center items-start py-xxl px-s md:px-xxl bg-lightGrey">
-        <div className="max-w-[563px] flex flex-col gap-m md:gap-xl mx-auto md:mx-0">
+        <div className="max-w-[563px] flex flex-col gap-m md:gap-lg mx-auto md:mx-0">
           {/* Daikin Badge */}
           <div className="flex items-center gap-xs">
             <Image
@@ -40,7 +40,7 @@ export const Hero = () => {
           <div className="flex flex-wrap gap-xs mt-xs">
             <Button
               variant="outline"
-              size="lg"
+              size="md"
               onClick={() =>
                 document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
               }
@@ -50,7 +50,7 @@ export const Hero = () => {
 
             <Button
               variant="primary"
-              size="lg"
+              size="md"
               onClick={() => (window.location.href = 'tel:+919876543210')}
             >
               Call us now
@@ -63,7 +63,7 @@ export const Hero = () => {
       <div className="relative h-[300px] md:h-auto md:min-h-[500px]">
         <Image
           src="/media/hero-ac.png"
-          alt="Modern living room with Daikin air conditioner"
+          alt="Modern living room with a Daikin air conditioner on the wall"
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"

@@ -1,34 +1,41 @@
 import React from 'react'
+import Image from 'next/image'
+import Button from '@/components/ui/Button'
 
 export function AboutUs() {
   return (
-    <section className="px-m py-xxl bg-lightGrey">
-      <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-xxl">
-        <div className="w-full lg:w-1/2 flex justify-center">
-          <div className="w-full aspect-square bg-white rounded-xl flex items-center justify-center border border-border shadow-sm">
-            <span className="text-textAlt text-bodyMedium font-semibold">
-              [Premium Image Placeholder]
-            </span>
+    <section className="flex flex-col md:flex-row items-stretch w-full border-y border-grey bg-white">
+      {/* Left side: Image */}
+      <div className="w-full md:w-1/2 relative min-h-[400px] md:min-h-[500px]">
+        <Image
+          src="/media/about-us.png"
+          alt="Professional Daikin AC Technician"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      </div>
+
+      {/* Right side: Content */}
+      <div className="w-full md:w-1/2 flex items-center py-xxl px-s md:px-xxl lg:px-[120px]">
+        <div className="max-w-[600px] flex flex-col items-start gap-m">
+          <div className="flex flex-col gap-xs">
+            <span className="text-bodyMedium text-primary">About us</span>
+            <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt leading-tight">
+              Your Trusted Cooling Partner in Kochi
+            </h2>
           </div>
-        </div>
-        <div className="w-full lg:w-1/2">
-          <h2 className="text-h2 font-semibold text-text mb-s">About Galaxy Technologies</h2>
-          <p className="text-bodyMedium text-textAlt mb-lg">
-            We are dedicated to providing state-of-the-art cooling solutions tailored to your unique
-            needs. With years of expertise in the industry, our team ensures you get the most
-            efficient, reliable, and premium products available. We focus on enhancing your comfort
-            while ensuring peak energy efficiency.
+
+          <p className="text-bodyMedium text-textAlt leading-relaxed">
+            Galaxy Technologies is a Daikin authorised dealer committed to delivering reliable air
+            conditioning solutions backed by expert guidance and professional service. From helping
+            you choose the right system to providing installation and ongoing maintenance, our team
+            ensures comfort you can depend on.
           </p>
-          <div className="grid grid-cols-2 gap-m bg-white p-lg rounded-xl border border-border">
-            <div>
-              <h4 className="text-h1 font-semibold text-primary mb-xs">10+</h4>
-              <p className="text-bodySmall text-text font-semibold">Years Experience</p>
-            </div>
-            <div>
-              <h4 className="text-h1 font-semibold text-primary mb-xs">5k+</h4>
-              <p className="text-bodySmall text-text font-semibold">Happy Customers</p>
-            </div>
-          </div>
+
+          <Button variant="outline" size="md" className="mt-s px-8">
+            Learn more
+          </Button>
         </div>
       </div>
     </section>

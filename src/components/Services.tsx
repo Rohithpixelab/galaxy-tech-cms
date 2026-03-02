@@ -1,52 +1,62 @@
 import React from 'react'
-import { Activity, Droplets, ThermometerSnowflake } from 'lucide-react'
+import Image from 'next/image'
 
 const services = [
   {
-    icon: <ThermometerSnowflake size={24} />,
-    title: 'Installation',
-    desc: 'Professional installation ensuring optimum cooling performance.',
+    icon: '/media/AC%20Installation%20icon.png',
+    title: 'AC Installation',
+    desc: 'Professional installation for optimal performance.',
   },
   {
-    icon: <Activity size={24} />,
-    title: 'Repair',
-    desc: 'Fast and reliable repairs by certified technicians.',
+    icon: '/media/AC%20Repair%20icon.png',
+    title: 'AC Repair',
+    desc: 'Quick troubleshooting and dependable repairs.',
   },
   {
-    icon: <Droplets size={24} />,
-    title: 'Gas Refill',
-    desc: 'Safe refrigerant top-ups for restoring maximum cooling.',
+    icon: '/media/Gas%20Refilling%20icon.png',
+    title: 'Gas Refilling',
+    desc: 'Accurate refrigerant charging for efficient cooling.',
+  },
+  {
+    icon: '/media/Annual%20Maintenance%20Contracts%20icon.png',
+    title: 'Annual Maintenance Contracts',
+    desc: 'Regular maintenance to prevent issues.',
   },
 ]
 
 export function Services() {
   return (
-    <section className="px-m py-xxxl bg-primaryDark text-white">
-      <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-xxl items-center">
-        <div className="w-full lg:w-1/3">
-          <h2 className="text-h2 font-semibold mb-m">Expert Services</h2>
-          <p className="text-bodyMedium text-border mb-xl">
-            Keep your AC running smoothly with our range of maintenance and repair services. We
-            offer quick turnaround and guaranteed satisfaction.
-          </p>
-          <button className="bg-white text-primaryDark px-lg py-s rounded-m font-semibold hover:bg-lightGrey transition-colors w-fit">
-            Book Service
-          </button>
-        </div>
-        <div className="w-full lg:w-2/3 flex flex-col gap-lg">
-          {services.map((svc, i) => (
-            <div
-              key={i}
-              className="bg-primaryDarkAlt p-lg rounded-xl flex items-start sm:items-center gap-m border border-primaryDark hover:border-borderDark transition-colors"
-            >
-              <div className="bg-primary p-m rounded-m text-white flex-shrink-0">{svc.icon}</div>
-              <div className="flex flex-col">
-                <h4 className="text-h4 font-semibold mb-xs">{svc.title}</h4>
-                <p className="text-bodyMedium text-border">{svc.desc}</p>
-              </div>
+    <section className="flex flex-col items-center justify-center py-xxl px-s md:px-xxxl gap-xl border-t-[0.5px] border-grey bg-white w-full">
+      {/* Heading Section */}
+      <div className="flex flex-col items-center self-stretch w-full max-w-container mx-auto gap-4 text-center">
+        <h2 className="text-h3 font-semibold text-primaryDarkAlt">
+          AC Sales & Service in Kochi — Complete Support
+        </h2>
+        <p className="text-bodyMedium text-textAlt max-w-[800px] leading-relaxed">
+          From installation to repairs and preventive maintenance, Galaxy Technologies provides
+          reliable AC services to keep your cooling systems running efficiently year-round.
+        </p>
+      </div>
+
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg w-full max-w-container mx-auto mt-m lg:mt-lg px-m">
+        {services.map((svc, i) => (
+          <div key={i} className="flex flex-col items-center text-center">
+            {/* Icon Circle */}
+            <div className="w-[80px] h-[80px] bg-primarySurface rounded-full flex justify-center items-center mb-m shrink-0">
+              <Image
+                src={svc.icon}
+                width={68}
+                height={68}
+                alt={svc.title}
+                className="object-contain"
+              />
             </div>
-          ))}
-        </div>
+            {/* Text */}
+            <h4 className="text-h5 font-semibold text-primaryDarkAlt mb-xs">{svc.title}</h4>
+            <p className="text-bodySmall text-textAlt leading-relaxed">{svc.desc}</p>
+          </div>
+        ))}
       </div>
     </section>
   )
