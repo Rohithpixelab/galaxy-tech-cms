@@ -3,7 +3,10 @@ import Image from 'next/image'
 
 export function Footer() {
   return (
-    <footer className="flex flex-col items-center py-xxl px-s md:px-xxxl gap-xl border-t-[0.5px] border-grey bg-white w-full">
+    <footer
+      id="contact"
+      className="flex flex-col items-center py-xxl px-s md:px-xxxl gap-xl border-t-[0.5px] border-grey bg-white w-full"
+    >
       <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-container mx-auto gap-xl">
         {/* Left Side: Logo & Info */}
         <div className="flex flex-col items-start gap-m max-w-md">

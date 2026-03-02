@@ -31,7 +31,7 @@ const categories = [
 
 export function ProductCategories() {
   return (
-    <section className="bg-white py-xxl px-s md:px-xxxl">
+    <section id="products" className="bg-white py-xxl px-s md:px-xxxl">
       <div className="max-w-container mx-auto flex flex-col items-center gap-xl text-center">
         {/* Header */}
         <div className="max-w-[830px] flex flex-col gap-xs">

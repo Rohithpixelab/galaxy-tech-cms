@@ -1,10 +1,10 @@
 # Payload Blank Template
 
-This template comes configured with the bare minimum to get started on anything you need.
+This template comes configured with Payload 3.0, Next.js, and PostgreSQL (Supabase) to get you started quickly.
 
 ## Quick start
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+This template is configured to use PostgreSQL as the database. You can use a local PostgreSQL instance or a cloud provider like Supabase.
 
 ## Quick Start - local setup
 
@@ -17,7 +17,7 @@ After you click the `Deploy` button above, you'll want to have standalone copy o
 ### Development
 
 1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add your `DATABASE_URL` (e.g., from Supabase) to your `.env` file.
 
 3. `pnpm install && pnpm dev` to install dependencies and start the dev server
 4. open `http://localhost:3000` to open the app in your browser
@@ -26,12 +26,11 @@ That's it! Changes made in `./src` will be reflected in your app. Follow the on-
 
 #### Docker (Optional)
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+If you prefer to use Docker for local development instead of a local PostgreSQL instance, the provided `docker-compose.yml` file can be used.
 
 To do so, follow these steps:
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
+- Modify the `DATABASE_URL` in your `.env` file to point to your Docker container (e.g., `postgresql://payload:payload@127.0.0.1:5432/payload-db`)
 - Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
 
 ## How it works
