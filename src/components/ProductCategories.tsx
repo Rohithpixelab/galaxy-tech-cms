@@ -46,7 +46,14 @@ export async function ProductCategories() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-xl w-full">
           {categories.map((category) => {
             const media = category.image as Media | undefined
-            const imageUrl = media?.url || '/media/split-ac.png' // Fallback image if non provided
+            const filename = media?.filename
+
+            // Construct direct Supabase public URL to bypass Vercel serverless DB proxying.
+            const directSupabaseUrl = filename
+              ? `https://hnoiauivogwlrupoxztc.supabase.co/storage/v1/object/public/media/${filename}`
+              : '/media/split-ac.png'
+
+            const imageUrl = directSupabaseUrl
 
             return (
               <Link
