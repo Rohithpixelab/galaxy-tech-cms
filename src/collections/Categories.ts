@@ -16,6 +16,24 @@ export const Categories: CollectionConfig = {
     },
 
     {
+      name: 'short_description',
+      type: 'textarea',
+      label: 'Short Description',
+      admin: {
+        description: 'A brief summary of the category.',
+      },
+    },
+
+    {
+      name: 'description',
+      type: 'richText',
+      label: 'Description',
+      admin: {
+        description: 'A full detailed description of the category.',
+      },
+    },
+
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',

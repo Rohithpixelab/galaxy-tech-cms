@@ -39,7 +39,7 @@ export function Footer() {
 
         {/* Right Side: Quick Links */}
         <div className="flex flex-col items-start lg:items-end gap-m lg:pt-12 w-full lg:w-auto">
-          <ul className="flex flex-col items-start lg:items-end gap-s text-bodyMedium font-regular text-text">
+          <ul className="flex flex-col items-start lg:items-end gap-s text-bodySmall font-regular text-text">
             <li>
               <a href="#" className="hover:text-primary transition-colors">
                 Home

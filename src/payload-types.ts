@@ -187,6 +187,28 @@ export interface Category {
   id: number;
   name: string;
   /**
+   * A brief summary of the category.
+   */
+  short_description?: string | null;
+  /**
+   * A full detailed description of the category.
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
    * Upload category image or icon
    */
   image?: (number | null) | Media;
@@ -364,6 +386,8 @@ export interface BrandsSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
+  short_description?: T;
+  description?: T;
   image?: T;
   slug?: T;
   updatedAt?: T;

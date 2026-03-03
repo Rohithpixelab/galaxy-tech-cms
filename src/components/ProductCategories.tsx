@@ -1,35 +1,33 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import type { Media } from '@/payload-types'
 
-const categories = [
-  {
-    title: 'Split AC',
-    description: 'Quiet, energy-efficient AC for homes and offices.',
-    image: '/media/split-ac.png',
-  },
-  {
-    title: 'Cassette AC',
-    description: 'Uniform cooling for commercial spaces.',
-    image: '/media/cassette-ac.png',
-  },
-  {
-    title: 'Ductable Systems',
-    description: 'Seamless centralised comfort.',
-    image: '/media/ductable-ac.png',
-  },
-  {
-    title: 'VRV / VRF',
-    description: 'Smart cooling for large buildings.',
-    image: '/media/vrv-vrf.png',
-  },
-  {
-    title: 'Tower AC',
-    description: 'Powerful cooling for large areas.',
-    image: '/media/tower-ac.png',
-  },
-]
+export async function ProductCategories() {
+  const payload = await getPayload({ config: configPromise })
+  const { docs: fetchedCategories } = await payload.find({
+    collection: 'categories',
+    limit: 10,
+    sort: 'createdAt',
+  })
 
-export function ProductCategories() {
+  // Define the required order
+  const order = ['Split AC', 'Cassette AC', 'Ductable Systems', 'VRV / VRF', 'Tower AC']
+
+  // Sort categories based on the defined order (ignore case/spacing mismatches gracefully)
+  const categories = fetchedCategories.sort((a, b) => {
+    const normalize = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '')
+    const indexA = order.findIndex((o) => normalize(o) === normalize(a.name))
+    const indexB = order.findIndex((o) => normalize(o) === normalize(b.name))
+
+    // If not found in the custom order array, push it to the end
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
+
   return (
     <section id="products" className="bg-white py-xxl px-s md:px-xxxl">
       <div className="max-w-container mx-auto flex flex-col items-center gap-xl text-center">
@@ -46,27 +44,38 @@ export function ProductCategories() {
 
         {/* Categories Grid - Adjusted to 5 columns on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-xl w-full">
-          {categories.map((category, index) => (
-            <div key={index} className="flex flex-col items-start text-left gap-s group">
-              {/* Image Box */}
-              <div className="relative aspect-square w-full bg-white rounded-lg overflow-hidden border border-border group-hover:border-grey transition-colors">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
+          {categories.map((category) => {
+            const media = category.image as Media | undefined
+            const imageUrl = media?.url || '/media/split-ac.png' // Fallback image if non provided
 
-              {/* Text */}
-              <div className="flex flex-col gap-xs">
-                <h3 className="text-h5 font-semibold text-primaryDarkAlt leading-tight">
-                  {category.title}
-                </h3>
-                <p className="text-bodySmall text-textAlt leading-snug">{category.description}</p>
-              </div>
-            </div>
-          ))}
+            return (
+              <Link
+                href={`/categories/${category.slug || category.id}`}
+                key={category.id}
+                className="flex flex-col items-start text-left gap-s group cursor-pointer block"
+              >
+                {/* Image Box */}
+                <div className="relative aspect-square w-full bg-white rounded-lg overflow-hidden border border-border group-hover:border-grey transition-colors">
+                  <Image
+                    src={imageUrl}
+                    alt={media?.alt || category.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="flex flex-col gap-xs">
+                  <h3 className="text-h5 font-semibold text-primaryDarkAlt leading-tight group-hover:text-primary transition-colors">
+                    {category.name}
+                  </h3>
+                  <p className="text-bodySmall text-textAlt leading-snug">
+                    {category.short_description || ''}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>
