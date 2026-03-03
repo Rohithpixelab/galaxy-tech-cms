@@ -8,7 +8,7 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'Products', href: '#products' },
+  { name: 'Catalogue', href: '#products' },
   { name: 'About us', href: '#about' },
 ]
 
@@ -39,7 +39,7 @@ export const Navbar = () => {
             <li key={link.name}>
               <Link
                 href={link.href}
-                className="text-bodyMedium font-semibold text-text hover:text-primary transition-colors"
+                className="text-bodyMedium font-regular text-text hover:text-primary transition-colors"
               >
                 {link.name}
               </Link>
@@ -73,7 +73,7 @@ export const Navbar = () => {
                 <Link
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-bodyLarge font-semibold text-text hover:text-primary transition-colors"
+                  className="block text-bodyMedium font-regular text-text hover:text-primary transition-colors"
                 >
                   {link.name}
                 </Link>

@@ -60,7 +60,7 @@ export function SplitACGrid() {
         ))}
       </div>
 
-      <Button variant="outline" size="md">
+      <Button variant="outline" size="sm">
         View all products
       </Button>
     </section>

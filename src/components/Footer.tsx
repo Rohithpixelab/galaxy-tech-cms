@@ -10,7 +10,7 @@ export function Footer() {
       <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-container mx-auto gap-xl">
         {/* Left Side: Logo & Info */}
         <div className="flex flex-col items-start gap-m max-w-md">
-          <div className="relative w-[240px] h-[40px] mb-2">
+          <div className="relative w-[260px] h-[40px] mb-2">
             <Image
               src="/media/296df6681b7df5244edb8dab3154992c757e5558.png"
               alt="Galaxy Technologies Logo"
@@ -39,7 +39,7 @@ export function Footer() {
 
         {/* Right Side: Quick Links */}
         <div className="flex flex-col items-start lg:items-end gap-m lg:pt-12 w-full lg:w-auto">
-          <ul className="flex flex-col items-start lg:items-end gap-s text-bodyMedium font-semibold text-text">
+          <ul className="flex flex-col items-start lg:items-end gap-s text-bodyMedium font-regular text-text">
             <li>
               <a href="#" className="hover:text-primary transition-colors">
                 Home
@@ -47,7 +47,7 @@ export function Footer() {
             </li>
             <li>
               <a href="#" className="hover:text-primary transition-colors">
-                Products
+                Catalogue
               </a>
             </li>
             <li>
@@ -66,7 +66,7 @@ export function Footer() {
 
       {/* Bottom Bar: Copyright & Privacy */}
       <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-container mx-auto pt-lg border-t-[0.5px] border-grey mt-m gap-m">
-        <p className="text-bodySmall font-semibold text-textAlt">
+        <p className="text-bodySmall font-regular text-textAlt">
           &copy; {new Date().getFullYear()} Galaxy Technologies. All rights reserved.
         </p>
         <div className="flex items-center">

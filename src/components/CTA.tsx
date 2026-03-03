@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Button from './ui/Button'
 
 export function CTA() {
   return (
@@ -10,7 +11,7 @@ export function CTA() {
         alt="Air Conditioner Service"
         fill
         className="object-cover z-0"
-        quality={90}
+        quality={100}
       />
 
       {/* Black Opaque Overlay */}
@@ -27,12 +28,15 @@ export function CTA() {
 
         {/* Buttons */}
         <div className="flex flex-row items-center gap-4 mt-2">
-          <button className="px-6 py-3 rounded-full border border-white bg-transparent text-white font-semibold hover:bg-white/10 transition-colors">
+          <Button
+            variant="outline"
+            className="border-white text-white hover:bg-white/10 focus:ring-white"
+          >
             View models
-          </button>
-          <button className="px-6 py-3 rounded-full bg-white text-primary font-semibold hover:bg-primarySurface transition-colors">
+          </Button>
+          <Button variant="secondary" className="bg-white border-none focus:ring-white">
             Call us now
-          </button>
+          </Button>
         </div>
       </div>
     </section>

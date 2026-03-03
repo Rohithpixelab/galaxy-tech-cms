@@ -40,7 +40,7 @@ export const Hero = () => {
           <div className="flex flex-wrap gap-xs mt-xs">
             <Button
               variant="outline"
-              size="md"
+              size="sm"
               onClick={() =>
                 document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
               }
@@ -50,7 +50,7 @@ export const Hero = () => {
 
             <Button
               variant="primary"
-              size="md"
+              size="sm"
               onClick={() => (window.location.href = 'tel:+919876543210')}
             >
               Call us now
@@ -62,7 +62,7 @@ export const Hero = () => {
       {/* RIGHT SIDE on desktop / BOTTOM on mobile & tablet */}
       <div className="relative h-[300px] md:h-auto md:min-h-[500px]">
         <Image
-          src="/media/hero-ac.png"
+          src="/media/d84c4a9feeb734061807ab6d3c9ea4f5ff789e19.jpg"
           alt="Modern living room with a Daikin air conditioner on the wall"
           fill
           priority
