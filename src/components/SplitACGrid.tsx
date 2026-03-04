@@ -4,28 +4,29 @@ import { ProductCard } from '@/components/ui/ProductCard'
 
 const products = [
   {
-    name: 'JTKJ Waizu Series',
+    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
     priceRange: 'Rs 35000 - 45000',
-    rating: '5 Star',
-    description: 'Quiet, energy-efficient AC for homes and offices. Quiet, energy-efficient...',
+    tonnages: ['1 Ton', '1.5 Ton', '2 Ton'],
   },
   {
-    name: 'JTKJ Waizu Series',
+    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
     priceRange: 'Rs 35000 - 45000',
-    rating: '5 Star',
-    description: 'Quiet, energy-efficient AC for homes and offices. Quiet, energy-efficient...',
+    tonnages: ['1 Ton', '1.5 Ton', '2 Ton', '3 Ton'],
   },
   {
-    name: 'JTKJ Waizu Series',
+    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
     priceRange: 'Rs 35000 - 45000',
-    rating: '5 Star',
-    description: 'Quiet, energy-efficient AC for homes and offices. Quiet, energy-efficient...',
+    tonnages: ['1 Ton', '1.5 Ton'],
   },
   {
-    name: 'JTKJ Waizu Series',
+    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
     priceRange: 'Rs 35000 - 45000',
-    rating: '5 Star',
-    description: 'Quiet, energy-efficient AC for homes and offices. Quiet, energy-efficient...',
+    tonnages: ['1 Ton'],
+  },
+  {
+    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
+    priceRange: 'Rs 35000 - 45000',
+    tonnages: ['1 Ton', '2 Ton', '3 Ton'],
   },
 ]
 
@@ -53,8 +54,7 @@ export function SplitACGrid() {
             <ProductCard
               name={product.name}
               priceRange={product.priceRange}
-              rating={product.rating}
-              description={product.description}
+              tonnages={product.tonnages}
             />
           </div>
         ))}

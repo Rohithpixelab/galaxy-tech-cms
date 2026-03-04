@@ -4,25 +4,33 @@ import Image from 'next/image'
 export interface ProductCardProps {
   name: string
   priceRange: string
-  rating: string
-  description: string
   imageUrl?: string
+  tonnages?: string[]
   className?: string
 }
 
 export function ProductCard({
   name,
   priceRange,
-  rating,
-  description,
   imageUrl,
+  tonnages,
   className = '',
 }: ProductCardProps) {
+  // Handle tonnages display logic: max 4 items, else show 2 + "X more"
+  const maxVisibleTonnages = 4
+  let displayTonnages = tonnages || []
+  let extraCount = 0
+
+  if (displayTonnages.length > maxVisibleTonnages) {
+    displayTonnages = displayTonnages.slice(0, 2)
+    extraCount = (tonnages || []).length - 2
+  }
+
   return (
     <div
-      className={`flex flex-col w-[290px] justify-center items-start gap-s p-xs pb-s rounded-lg border-[0.5px] border-grey bg-white shrink-0 ${className}`}
+      className={`flex flex-col w-[290px] justify-center items-start rounded-lg bg-white shrink-0 overflow-hidden ${className}`}
     >
-      <div className="w-full aspect-[4/3] bg-[#A9A9A9] rounded-m overflow-hidden shrink-0 relative flex justify-center items-center">
+      <div className="w-full aspect-[4/3] bg-[#A9A9A9] rounded-t-lg overflow-hidden shrink-0 relative flex justify-center items-center">
         {imageUrl ? (
           <Image src={imageUrl} alt={name} fill className="object-cover" />
         ) : (
@@ -30,14 +38,38 @@ export function ProductCard({
         )}
       </div>
 
-      {/* Product Details */}
-      <div className="flex flex-col items-start w-full px-xs">
-        <h3 className="text-h5 font-semibold text-primaryDarkAlt mb-1">{name}</h3>
-        <p className="text-h5 font-semibold text-primaryDarkAlt mb-s">{priceRange}</p>
+      {/* Product Details (Text Box) */}
+      <div className="flex flex-col items-start self-stretch p-s gap-xs">
+        {/* Heading */}
+        <h3 className="text-primaryDarkAlt font-poppins text-h5 font-semibold text-left">{name}</h3>
 
-        <p className="text-h5 font-semibold text-textAlt mb-xs">{rating}</p>
+        {/* Pricing */}
+        <p className="text-textAlt font-poppins text-bodySmall font-regular text-left">
+          {priceRange}
+        </p>
 
-        <p className="text-bodySmall text-textAlt leading-snug line-clamp-3">{description}</p>
+        {/* Tonnage chips */}
+        {tonnages && tonnages.length > 0 && (
+          <div className="flex flex-row flex-wrap items-center gap-[6px] w-full pt-1">
+            {displayTonnages.map((tonnage, index) => (
+              <div
+                key={index}
+                className="flex py-[4px] px-xs justify-center items-center gap-[10px] rounded-xxl border-[0.25px] border-borderDark bg-primarySurface"
+              >
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap text-primaryDark font-inter text-bodyExtraSmall font-regular">
+                  {tonnage}
+                </span>
+              </div>
+            ))}
+            {extraCount > 0 && (
+              <div className="flex py-[4px] px-xs justify-center items-center gap-[10px] rounded-xxl border-[0.25px] border-borderDark bg-primarySurface">
+                <span className="overflow-hidden text-ellipsis whitespace-nowrap text-primaryDark font-inter text-bodyExtraSmall font-regular">
+                  +{extraCount}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -43,6 +43,7 @@ const config: Config = {
         h5: ['16px', { lineHeight: '1.4' }],
         h6: ['14px', { lineHeight: '1.4' }],
 
+        bodyExtraSmall: ['12px', { lineHeight: '16px' }],
         bodySmall: ['14px', { lineHeight: '20px' }],
         bodyMedium: ['16px', { lineHeight: '28px' }],
         bodyLarge: ['18px', { lineHeight: '32px' }],
@@ -50,6 +51,7 @@ const config: Config = {
 
       /* Radius */
       borderRadius: {
+        xxs: '4px',
         xs: '8px',
         s: '16px',
         m: '20px',

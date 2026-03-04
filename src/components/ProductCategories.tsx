@@ -32,7 +32,7 @@ export async function ProductCategories() {
     <section id="products" className="bg-white py-xxl px-s md:px-xxxl">
       <div className="max-w-container mx-auto flex flex-col items-center gap-xl text-center">
         {/* Header */}
-        <div className="max-w-[830px] flex flex-col gap-xs">
+        <div className="max-w-[900px] flex flex-col gap-s">
           <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt">
             Explore Our Range of Daikin Air Conditioning Solutions
           </h2>
