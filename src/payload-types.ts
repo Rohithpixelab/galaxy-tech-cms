@@ -223,22 +223,34 @@ export interface Category {
 export interface ProductModel {
   id: number;
   name: string;
+  series: string;
   brand?: (number | null) | Brand;
   category?: (number | null) | Category;
+  technology?: ('inverter' | 'non-inverter') | null;
+  description?: string | null;
   images?:
     | {
         image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
-  variants?:
+  features?:
     | {
-        variantName?: string | null;
-        minPrice?: number | null;
-        maxPrice?: number | null;
+        feature?: string | null;
         id?: string | null;
       }[]
     | null;
+  variants: {
+    capacity?: ('1-ton' | '1.5-ton' | '2-ton') | null;
+    modelNumber?: string | null;
+    price: number;
+    energyRating?: number | null;
+    roomSize?: string | null;
+    coolingCapacityKW?: number | null;
+    indoorModel?: string | null;
+    outdoorModel?: string | null;
+    id?: string | null;
+  }[];
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -399,20 +411,34 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface ProductModelsSelect<T extends boolean = true> {
   name?: T;
+  series?: T;
   brand?: T;
   category?: T;
+  technology?: T;
+  description?: T;
   images?:
     | T
     | {
         image?: T;
         id?: T;
       };
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
   variants?:
     | T
     | {
-        variantName?: T;
-        minPrice?: T;
-        maxPrice?: T;
+        capacity?: T;
+        modelNumber?: T;
+        price?: T;
+        energyRating?: T;
+        roomSize?: T;
+        coolingCapacityKW?: T;
+        indoorModel?: T;
+        outdoorModel?: T;
         id?: T;
       };
   slug?: T;
