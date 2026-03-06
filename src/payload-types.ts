@@ -222,18 +222,13 @@ export interface Category {
  */
 export interface ProductModel {
   id: number;
-  name: string;
   series: string;
+  name: string;
   brand?: (number | null) | Brand;
   category?: (number | null) | Category;
   technology?: ('inverter' | 'non-inverter') | null;
   description?: string | null;
-  images?:
-    | {
-        image?: (number | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
+  images?: (number | Media)[] | null;
   features?:
     | {
         feature?: string | null;
@@ -241,9 +236,12 @@ export interface ProductModel {
       }[]
     | null;
   variants: {
-    capacity?: ('1-ton' | '1.5-ton' | '2-ton') | null;
+    /**
+     * Provide only the numerical value. The suffix "Ton" is fixed.
+     */
+    capacity?: number | null;
     modelNumber?: string | null;
-    price: number;
+    price?: number | null;
     energyRating?: number | null;
     roomSize?: string | null;
     coolingCapacityKW?: number | null;
@@ -410,18 +408,13 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "product-models_select".
  */
 export interface ProductModelsSelect<T extends boolean = true> {
-  name?: T;
   series?: T;
+  name?: T;
   brand?: T;
   category?: T;
   technology?: T;
   description?: T;
-  images?:
-    | T
-    | {
-        image?: T;
-        id?: T;
-      };
+  images?: T;
   features?:
     | T
     | {

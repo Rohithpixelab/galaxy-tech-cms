@@ -8,21 +8,19 @@ export const ProductModels: CollectionConfig = {
     plural: 'Products',
   },
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'series',
   },
   fields: [
-    {
-      name: 'name',
-      type: 'text',
-      required: true,
-    },
-
     {
       name: 'series',
       type: 'text',
       required: true,
     },
-
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+    },
     {
       name: 'brand',
       type: 'relationship',
@@ -51,14 +49,9 @@ export const ProductModels: CollectionConfig = {
 
     {
       name: 'images',
-      type: 'array',
-      fields: [
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-        },
-      ],
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
     },
 
     {
@@ -80,12 +73,11 @@ export const ProductModels: CollectionConfig = {
         {
           name: 'capacity',
           label: 'Capacity (Ton)',
-          type: 'select',
-          options: [
-            { label: '1 Ton', value: '1-ton' },
-            { label: '1.5 Ton', value: '1.5-ton' },
-            { label: '2 Ton', value: '2-ton' },
-          ],
+          type: 'number',
+          admin: {
+            placeholder: 'e.g. 1.5. Ton will be added automatically.',
+            description: 'Provide only the numerical value. The suffix "Ton" is fixed.',
+          },
         },
 
         {
@@ -96,7 +88,6 @@ export const ProductModels: CollectionConfig = {
         {
           name: 'price',
           type: 'number',
-          required: true,
         },
 
         {
@@ -133,7 +124,7 @@ export const ProductModels: CollectionConfig = {
       type: 'text',
       unique: true,
       hooks: {
-        beforeValidate: [({ data }) => formatSlug(data?.name, 'model')],
+        beforeValidate: [({ data }) => formatSlug(data?.series, 'model')],
       },
     },
   ],
