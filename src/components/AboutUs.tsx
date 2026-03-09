@@ -6,7 +6,7 @@ export function AboutUs() {
   return (
     <section
       id="about"
-      className="flex flex-col-reverse md:flex-row items-stretch w-full border-y border-grey bg-white"
+      className="flex flex-col-reverse md:flex-row items-stretch w-full border-y border-grey bg-lightGrey"
     >
       {/* Left side: Image */}
       <div className="w-full md:w-1/2 relative min-h-[400px] md:min-h-[500px]">

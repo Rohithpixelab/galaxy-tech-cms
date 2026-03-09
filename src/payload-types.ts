@@ -191,6 +191,14 @@ export interface Category {
    */
   short_description?: string | null;
   /**
+   * The title to display on the category page (e.g., "Daikin Split Air Conditioners").
+   */
+  page_title?: string | null;
+  /**
+   * The description to display under the page title on the category page.
+   */
+  page_description?: string | null;
+  /**
    * A full detailed description of the category.
    */
   description?: {
@@ -397,6 +405,8 @@ export interface BrandsSelect<T extends boolean = true> {
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
   short_description?: T;
+  page_title?: T;
+  page_description?: T;
   description?: T;
   image?: T;
   slug?: T;

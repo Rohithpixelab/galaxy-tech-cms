@@ -25,6 +25,25 @@ export const Categories: CollectionConfig = {
     },
 
     {
+      name: 'page_title',
+      type: 'text',
+      label: 'Page Title',
+      admin: {
+        description:
+          'The title to display on the category page (e.g., "Daikin Split Air Conditioners").',
+      },
+    },
+
+    {
+      name: 'page_description',
+      type: 'textarea',
+      label: 'Page Description',
+      admin: {
+        description: 'The description to display under the page title on the category page.',
+      },
+    },
+
+    {
       name: 'description',
       type: 'richText',
       label: 'Description',

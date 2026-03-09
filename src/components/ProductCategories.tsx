@@ -5,7 +5,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import type { Media } from '@/payload-types'
 
-export async function ProductCategories() {
+export async function ProductCategories({ hideHeader = false }: { hideHeader?: boolean } = {}) {
   const payload = await getPayload({ config: configPromise })
   const { docs: fetchedCategories } = await payload.find({
     collection: 'categories',
@@ -31,16 +31,18 @@ export async function ProductCategories() {
   return (
     <section id="products" className="bg-white py-xxl px-s md:px-xxxl">
       <div className="max-w-container mx-auto flex flex-col items-center gap-xl text-center">
-        {/* Header */}
-        <div className="max-w-[900px] flex flex-col gap-s">
-          <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt">
-            Explore Our Range of Daikin Air Conditioning Solutions
-          </h2>
-          <p className="text-bodySmall md:text-bodyMedium text-textAlt">
-            We offer a complete selection of Daikin air conditioners in Kochi, designed for comfort,
-            efficiency, and long-term reliability across residential and commercial environments.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="max-w-[900px] flex flex-col gap-s">
+            <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt">
+              Explore Our Range of Daikin Air Conditioning Solutions
+            </h2>
+            <p className="text-bodySmall md:text-bodyMedium text-textAlt">
+              We offer a complete selection of Daikin air conditioners in Kochi, designed for
+              comfort, efficiency, and long-term reliability across residential and commercial
+              environments.
+            </p>
+          </div>
+        )}
 
         {/* Categories Grid - Adjusted to 5 columns on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-xl w-full">
@@ -72,13 +74,26 @@ export async function ProductCategories() {
                 </div>
 
                 {/* Text */}
-                <div className="flex flex-col gap-xs">
-                  <h3 className="text-h5 font-semibold text-primaryDarkAlt leading-tight group-hover:text-primary transition-colors">
-                    {category.name}
+                <div className="flex flex-col gap-xs mt-2">
+                  <h3 className="text-h6 font-semibold text-primaryDarkAlt leading-tight group-hover:text-primary transition-colors">
+                    {category.name.toLowerCase().includes('split')
+                      ? 'Split AC Models'
+                      : category.name.toLowerCase().includes('cassette')
+                        ? 'Cassette AC Models'
+                        : category.name.toLowerCase().includes('duct')
+                          ? 'Ductable Systems'
+                          : category.name.toLowerCase().includes('vrv') ||
+                              category.name.toLowerCase().includes('vrf')
+                            ? 'VRV / VRF Systems'
+                            : category.name.toLowerCase().includes('tower')
+                              ? 'Tower AC Models'
+                              : category.name}
                   </h3>
-                  <p className="text-bodySmall text-textAlt leading-snug">
-                    {category.short_description || ''}
-                  </p>
+                  {category.short_description && (
+                    <p className="text-bodySmall text-textAlt leading-snug">
+                      {category.short_description}
+                    </p>
+                  )}
                 </div>
               </Link>
             )

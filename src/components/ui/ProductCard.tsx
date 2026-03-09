@@ -28,18 +28,23 @@ export function ProductCard({
 
   return (
     <div
-      className={`flex flex-col w-[290px] justify-center items-start rounded-lg bg-white shrink-0 overflow-hidden ${className}`}
+      className={`group flex flex-col w-full max-w-[262px] mx-auto justify-center items-end rounded-[20px] border-[0.5px] border-border bg-white overflow-hidden transition-shadow duration-300 hover:shadow-md ${className}`}
     >
       <div className="w-full aspect-[4/3] bg-[#A9A9A9] rounded-t-lg overflow-hidden shrink-0 relative flex justify-center items-center">
         {imageUrl ? (
-          <Image src={imageUrl} alt={name} fill className="object-cover" />
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         ) : (
           <span className="text-white/60 text-sm font-medium">No Image</span>
         )}
       </div>
 
       {/* Product Details (Text Box) */}
-      <div className="flex flex-col items-start self-stretch p-s gap-xs">
+      <div className="flex flex-col flex-1 justify-center items-end self-stretch p-s gap-xs">
         {/* Heading */}
         <h3 className="text-primaryDarkAlt font-poppins text-h5 font-semibold text-left">{name}</h3>
 

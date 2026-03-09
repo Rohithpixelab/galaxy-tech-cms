@@ -1,40 +1,62 @@
 import React from 'react'
+import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { ProductCard } from '@/components/ui/ProductCard'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import type { Media, ProductModel } from '@/payload-types'
 
-const products = [
-  {
-    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
-    priceRange: 'Rs 35000 - 45000',
-    tonnages: ['1 Ton', '1.5 Ton', '2 Ton'],
-  },
-  {
-    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
-    priceRange: 'Rs 35000 - 45000',
-    tonnages: ['1 Ton', '1.5 Ton', '2 Ton', '3 Ton'],
-  },
-  {
-    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
-    priceRange: 'Rs 35000 - 45000',
-    tonnages: ['1 Ton', '1.5 Ton'],
-  },
-  {
-    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
-    priceRange: 'Rs 35000 - 45000',
-    tonnages: ['1 Ton'],
-  },
-  {
-    name: 'Daikin FTL 3-Star Non-Inverter Standard Split AC',
-    priceRange: 'Rs 35000 - 45000',
-    tonnages: ['1 Ton', '2 Ton', '3 Ton'],
-  },
-]
+function getPriceRange(variants: ProductModel['variants']) {
+  if (!variants || variants.length === 0) return 'Price on request'
+  const prices = variants.map((v) => v.price).filter((p): p is number => typeof p === 'number')
+  if (prices.length === 0) return 'Price on request'
+  const minPrice = Math.min(...prices)
+  const maxPrice = Math.max(...prices)
+  if (minPrice === maxPrice) {
+    return `Rs ${minPrice.toLocaleString('en-IN')}`
+  }
+  return `Rs ${minPrice.toLocaleString('en-IN')} - ${maxPrice.toLocaleString('en-IN')}`
+}
 
-export function SplitACGrid() {
+function getTonnages(variants: ProductModel['variants']) {
+  if (!variants || variants.length === 0) return []
+  const capacities = variants
+    .map((v) => v.capacity)
+    .filter((c): c is number => typeof c === 'number')
+  const uniqueCapacities = Array.from(new Set(capacities)).sort((a, b) => a - b)
+  return uniqueCapacities.map((c) => `${c} Ton`)
+}
+
+export async function SplitACGrid({ hideViewAll = false }: { hideViewAll?: boolean }) {
+  const payload = await getPayload({ config: configPromise })
+
+  // First fetch the 'Split AC' category to get its ID
+  const { docs: splitAcCategories } = await payload.find({
+    collection: 'categories',
+    where: {
+      name: {
+        like: 'Split', // flexible match
+      },
+    },
+    limit: 1,
+  })
+
+  const splitAcCat = splitAcCategories[0]
+
+  // Fetch some popular products (e.g. latest 4)
+  const { docs: fetchedProducts } = await payload.find({
+    collection: 'product-models',
+    ...(splitAcCat ? { where: { category: { equals: splitAcCat.id } as any } } : {}),
+    limit: 4,
+    sort: '-createdAt',
+  })
+
+  const linkHref = splitAcCat?.slug ? `/categories/${splitAcCat.slug}` : `/catalogue`
+
   return (
     <section
       id="products"
-      className="flex flex-col items-center justify-center py-xxl px-s md:px-xxxl gap-xl bg-lightGrey w-full"
+      className="flex flex-col items-center justify-center py-xxl px-s md:px-xxxl gap-xl bg-white w-full"
     >
       <div className="flex flex-col items-start self-stretch w-full max-w-container mx-auto gap-4">
         <h2 className="text-h4 font-semibold text-primaryDarkAlt">
@@ -47,22 +69,50 @@ export function SplitACGrid() {
         </p>
       </div>
 
-      {/* Horizontal scrolling grid for products */}
-      <div className="flex flex-row overflow-x-auto gap-[24px] w-full max-w-container mx-auto pb-4 snap-x hide-scrollbar">
-        {products.map((product, index) => (
-          <div key={index} className="snap-start shrink-0">
-            <ProductCard
-              name={product.name}
-              priceRange={product.priceRange}
-              tonnages={product.tonnages}
-            />
-          </div>
-        ))}
-      </div>
+      {/* Products Grid */}
+      {!fetchedProducts || fetchedProducts.length === 0 ? (
+        <div className="w-full text-center py-lg bg-lightGrey rounded-lg max-w-container mx-auto">
+          <p className="text-bodyMedium text-textAlt">This category is empty.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col md:flex-row items-center md:items-start hide-scrollbar gap-[24px] w-full max-w-container mx-auto pb-4 md:overflow-x-auto md:snap-x">
+          {fetchedProducts.map((product) => {
+            const priceRange = getPriceRange(product.variants)
+            const tonnages = getTonnages(product.variants)
 
-      <Button variant="outline" size="sm">
-        View all products
-      </Button>
+            let imageUrl: string | undefined
+            if (product.images && product.images.length > 0) {
+              const firstImage = product.images[0]
+              const media =
+                typeof firstImage === 'object' && firstImage !== null
+                  ? (firstImage as Media)
+                  : undefined
+              if (media?.filename) {
+                imageUrl = `https://hnoiauivogwlrupoxztc.supabase.co/storage/v1/object/public/media/${media.filename}`
+              }
+            }
+
+            return (
+              <div key={product.id} className="w-full sm:w-auto shrink-0 md:snap-start">
+                <ProductCard
+                  name={product.name || product.series}
+                  priceRange={priceRange}
+                  tonnages={tonnages}
+                  imageUrl={imageUrl}
+                />
+              </div>
+            )
+          })}
+        </div>
+      )}
+
+      {!hideViewAll && (
+        <Link href={linkHref}>
+          <Button variant="outline" size="sm">
+            View all products
+          </Button>
+        </Link>
+      )}
     </section>
   )
 }

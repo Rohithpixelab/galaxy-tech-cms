@@ -13,7 +13,7 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="flex flex-col lg:flex-row items-center justify-center py-xxl px-s md:px-xxxl gap-xxl self-stretch bg-lightGrey w-full">
+    <section className="flex flex-col lg:flex-row items-center justify-center py-xxl px-s md:px-xxxl gap-xxl self-stretch bg-white w-full">
       {/* Left side text and list */}
       <div className="flex flex-col items-start gap-xs w-full lg:w-1/2 max-w-lg">
         <h2 className="text-h3 md:text-h2 font-semibold text-primaryDarkAlt mb-s">
