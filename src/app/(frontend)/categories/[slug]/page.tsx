@@ -11,13 +11,14 @@ import { CategoryProductGrid } from '@/components/CategoryProductGrid'
 import { CTA } from '@/components/CTA'
 import { FAQ } from '@/components/FAQ'
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const payload = await getPayload({ config: configPromise })
   const { docs: fetchedCategories } = await payload.find({
     collection: 'categories',
     where: {
       slug: {
-        equals: params.slug,
+        equals: slug,
       },
     },
     limit: 1,
@@ -53,14 +54,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const payload = await getPayload({ config: configPromise })
 
   const { docs: fetchedCategories } = await payload.find({
     collection: 'categories',
     where: {
       slug: {
-        equals: params.slug,
+        equals: slug,
       },
     },
     limit: 1,

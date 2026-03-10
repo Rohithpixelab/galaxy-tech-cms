@@ -46,7 +46,7 @@ export async function SplitACGrid({ hideViewAll = false }: { hideViewAll?: boole
   // Fetch some popular products (e.g. latest 4)
   const { docs: fetchedProducts } = await payload.find({
     collection: 'product-models',
-    ...(splitAcCat ? { where: { category: { equals: splitAcCat.id } as any } } : {}),
+    ...(splitAcCat ? { where: { category: { equals: splitAcCat.id } } } : {}),
     limit: 4,
     sort: '-createdAt',
   })
